@@ -14,11 +14,11 @@ pipeline {
 
                     def branch = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
                     if (branch == 'dev') {
-                        sh './build.sh dev'
-                        sh './deploy.sh dev'
+                        sh '/home/ubuntu/Capstone/build.sh dev' // Full path to build.sh
+                        sh '/home/ubuntu/Capstone/deploy.sh dev' // Full path to deploy.sh
                     } else if (branch == 'master') {
-                        sh './build.sh prod'
-                        sh './deploy.sh prod'
+                        sh '/home/ubuntu/Capstone/build.sh prod' // Full path to build.sh
+                        sh '/home/ubuntu/Capstone/deploy.sh prod' // Full path to deploy.sh
                     } else {
                         echo 'Not triggered by a push to dev or master branch, skipping deployment'
                     }
@@ -36,3 +36,4 @@ pipeline {
         }
     }
 }
+
