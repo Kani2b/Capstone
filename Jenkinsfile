@@ -16,15 +16,17 @@ pipeline {
         stage('Build and Push Docker Image') {
             steps {
                 script {
-                    sh 'chmod +x build.sh'
-                    sh 'chmod +x deploy.sh'
+                    withCredentials([usernamePassword(credentialsId: 'Docker', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASSWORD')]) {
+                        sh 'chmod +x build.sh'
+                        sh 'chmod +x deploy.sh'
 
-                    def branch = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
-                    if (branch == 'dev' || branch == 'master') {
-                        sh './build.sh'
-                        sh './deploy.sh'
-                    } else {
-                        echo 'Not triggered by a push to dev or master branch, skipping deployment'
+                        def branch = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
+                        if (branch == 'dev' || branch == 'master') {
+                            sh "./build.sh $DOCKER_USER $DOCKER_PASSWORD"
+                            sh "./deploy.sh $DOCKER_USER $DOCKER_PASSWORD"
+                        } else {
+                            echo 'Not triggered by a push to dev or master branch, skipping deployment'
+                        }
                     }
                 }
             }
