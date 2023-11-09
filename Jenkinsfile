@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_DEV_REPO = "https://hub.docker.com/r/kani2b/capstone-dev" // Docker Hub dev repository
-        DOCKER_PROD_REPO = "https://hub.docker.com/r/kani2b/capstone-prod" // Docker Hub prod repository
+        DOCKER_DEV_REPO = "kani2b/capstone-dev" 
+        DOCKER_PROD_REPO = "kani2b/capstone-prod"
     }
 
     stages {
