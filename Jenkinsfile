@@ -15,8 +15,7 @@ pipeline {
 
         stage('Build and Push Docker Image') {
             steps {
-                script {
-                    dir('/home/ubuntu/Capstone') { 
+                script { 
                         sh 'chmod +x build.sh'
                         sh 'chmod +x deploy.sh'
 
@@ -31,7 +30,7 @@ pipeline {
                             echo 'Not triggered by a push to dev or master branch, skipping deployment'
                         }
                     }
-                }
+                
             }
         }
     }
