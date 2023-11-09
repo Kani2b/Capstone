@@ -16,16 +16,16 @@ pipeline {
         stage('Build and Push Docker Image') {
             steps {
                 script {
-                    sh 'chmod +x /home/ubuntu/Capstone/build.sh'
-                    sh 'chmod +x /home/ubuntu/Capstone/deploy.sh'
+                    sh 'chmod 761 build.sh'
+                    sh 'chmod 761 deploy.sh'
 
                     def branch = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
                     if (branch == 'dev') {
-                        sh '/home/ubuntu/Capstone/build.sh dev' // Full path to build.sh
-                        sh '/home/ubuntu/Capstone/deploy.sh dev' // Full path to deploy.sh
+                        sh 'build.sh dev'
+                        sh '/home/ubuntu/Capstone/deploy.sh dev'
                     } else if (branch == 'master') {
-                        sh '/home/ubuntu/Capstone/build.sh prod' // Full path to build.sh
-                        sh '/home/ubuntu/Capstone/deploy.sh prod' // Full path to deploy.sh
+                        sh 'build.sh prod' 
+                        sh 'deploy.sh prod' 
                     } else {
                         echo 'Not triggered by a push to dev or master branch, skipping deployment'
                     }
