@@ -16,7 +16,7 @@ pipeline {
         stage('Build and Push Docker Image') {
             steps {
                 script {
-                    dir('/var/lib/jenkins/Capstone') { 
+                    dir('/home/ubuntu/Capstone') { 
                         sh 'chmod +x build.sh'
                         sh 'chmod +x deploy.sh'
 
