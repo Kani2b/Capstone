@@ -12,8 +12,8 @@ pipeline {
                script {
                   git branch: 'dev', url: 'https://github.com/Kani2b/Capstone.git'
 
-                  sh 'chmod +x /home/ubuntu/Capstone/build.sh'
-                  sh 'chmod +x /home/ubuntu/Capstone/deploy.sh'
+                  sh 'sudo chmod +x /home/ubuntu/Capstone/build.sh'
+                  sh 'sudo chmod +x /home/ubuntu/Capstone/deploy.sh'
 
                   def branch = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
                   if (branch == 'dev') {
