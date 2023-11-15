@@ -10,7 +10,6 @@ pipeline {
         stage('Checkout Git Repository') {
             steps {
                 script {
-                    // Use a lightweight checkout to fetch only the changes
                     checkout scm
                 }
             }
@@ -21,8 +20,6 @@ pipeline {
                 script {
                     sh 'chmod +x build.sh'
                     sh 'chmod +x deploy.sh'
-
-                    // Check if the branch is master before deploying to prod
                     if (env.BRANCH_NAME == 'master') {
                         sh './deploy.sh'
                     } else {
