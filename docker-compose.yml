@@ -4,6 +4,6 @@ services:
   reactapp:
     image: react-app
     ports:
-      - "8080:80"
+      - "80:80"
     stdin_open: true
     tty: true
