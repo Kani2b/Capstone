@@ -9,7 +9,10 @@ pipeline {
     stages {
         stage('Checkout Git Repository') {
             steps {
-                git branch: 'dev', url: 'https://github.com/Kani2b/Capstone.git'
+                script {
+                    // Use a lightweight checkout to fetch only the changes
+                    checkout scm
+                }
             }
         }
 
@@ -19,7 +22,12 @@ pipeline {
                     sh 'chmod +x build.sh'
                     sh 'chmod +x deploy.sh'
 
-                    sh './deploy.sh'
+                    // Check if the branch is master before deploying to prod
+                    if (env.BRANCH_NAME == 'master') {
+                        sh './deploy.sh'
+                    } else {
+                        echo 'Skipping deployment as the branch is not master.'
+                    }
                 }
             }
         }
