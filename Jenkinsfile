@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Checkout Git Repository') {
             steps {
-                git branch: 'dev', url: 'https://github.com/Kani2b/Capstone.git'
+                git branch: 'master', url: 'https://github.com/Kani2b/Capstone.git'
             }
         }
 
